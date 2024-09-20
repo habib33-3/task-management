@@ -1,0 +1,5 @@
+# Exit on errors
+set -e
+
+# Run lint-staged to handle linting and formatting on staged files
+pnpm lint-staged
