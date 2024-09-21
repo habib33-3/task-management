@@ -1,4 +1,9 @@
 import { Router } from "express";
+import validateSchema from "../../middlewares/validateSchema";
+import {
+    createUserZodSchema,
+    loginUserZodSchema,
+} from "../validations/user.validations";
 import {
     createUserHandler,
     loginUserHandler,
@@ -6,8 +11,8 @@ import {
 
 const router = Router();
 
-router.post("/", createUserHandler);
+router.post("/", validateSchema(createUserZodSchema), createUserHandler);
 
-router.post("/login", loginUserHandler);
+router.post("/login", validateSchema(loginUserZodSchema), loginUserHandler);
 
 export const userRoutes = router;
