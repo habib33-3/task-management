@@ -1,3 +1,4 @@
+import { compare } from "bcrypt";
 import { Request } from "express";
 import HttpStatusCode from "../../enums/http-status";
 import asyncHandler from "../../shared/asyncHandler";
@@ -27,13 +28,21 @@ export const loginUserHandler = asyncHandler(
 
         const user = await findUserByEmail(email);
 
-        if (password === user?.password) {
-            sendResponse(res, {
-                statusCode: HttpStatusCode.OK,
-                success: true,
-                data: user,
-                message: "user logged in successfully",
-            });
+        if (!user) {
+            throw new Error("wrong credential");
         }
+
+        const isPasswordMatched = await compare(password, user.password);
+
+        if (!isPasswordMatched) {
+            throw new Error("wrong credential");
+        }
+
+        sendResponse(res, {
+            statusCode: HttpStatusCode.OK,
+            success: true,
+            data: user,
+            message: "user logged in",
+        });
     }
 );

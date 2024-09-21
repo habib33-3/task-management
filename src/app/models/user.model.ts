@@ -1,4 +1,6 @@
+import { hash } from "bcrypt";
 import { model, Schema } from "mongoose";
+import env from "../../config/env";
 import TUser from "../interfaces/user.interface";
 
 const UserSchema = new Schema<TUser>({
@@ -15,6 +17,14 @@ const UserSchema = new Schema<TUser>({
         type: String,
         required: true,
     },
+});
+
+UserSchema.pre("save", async function (next) {
+    if (this.isModified("password") || this.isNew) {
+        this.password = await hash(this.password, Number(env.saltRound!));
+    }
+
+    next();
 });
 
 const User = model<TUser>("user", UserSchema);

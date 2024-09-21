@@ -11,6 +11,8 @@ const validateSchema =
                 query: req.query,
                 cookies: req.cookies,
             });
+
+            next();
         } catch (error) {
             next(error);
         }
