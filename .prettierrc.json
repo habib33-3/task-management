@@ -6,13 +6,11 @@
     "bracketSpacing": true,
     "bracketSameLine": false,
     "arrowParens": "always",
-    "importOrder": ["^node:", "^express$", "^@prisma/(.*)$", "^@?\\w", "^[./]"],
+    "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true,
     "plugins": [
         "@trivago/prettier-plugin-sort-imports",
-        "prettier-plugin-organize-imports",
-
         "prettier-plugin-packagejson"
     ]
 }

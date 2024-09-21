@@ -1,4 +1,7 @@
 import express from "express";
+
+import { globalErrorCatcher } from "../middlewares/globalErrorCatcher";
+import notFound from "../middlewares/notFound";
 import router from "./routes";
 
 const app = express();
@@ -15,5 +18,9 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/api/v1", router);
+
+app.use(globalErrorCatcher);
+
+app.use(notFound);
 
 export default app;

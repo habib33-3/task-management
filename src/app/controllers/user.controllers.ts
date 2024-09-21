@@ -1,6 +1,8 @@
 import { compare } from "bcrypt";
 import { Request } from "express";
+
 import HttpStatusCode from "../../enums/http-status";
+import ApiError from "../../error/ApiError";
 import asyncHandler from "../../shared/asyncHandler";
 import sendResponse from "../../shared/sendResponse";
 import User from "../models/user.model";
@@ -29,13 +31,13 @@ export const loginUserHandler = asyncHandler(
         const user = await findUserByEmail(email);
 
         if (!user) {
-            throw new Error("wrong credential");
+            throw new ApiError(HttpStatusCode.FORBIDDEN, "wrong credential");
         }
 
         const isPasswordMatched = await compare(password, user.password);
 
         if (!isPasswordMatched) {
-            throw new Error("wrong credential");
+            throw new ApiError(HttpStatusCode.FORBIDDEN, "wrong credential");
         }
 
         sendResponse(res, {
