@@ -1,4 +1,6 @@
 import { Router } from "express";
+
+import { taskRoutes } from "./task.routes";
 import { userRoutes } from "./user.routes";
 
 const router = Router();
@@ -10,6 +12,10 @@ const routes: {
     {
         path: "/user",
         route: userRoutes,
+    },
+    {
+        path: "/task",
+        route: taskRoutes,
     },
 ];
 

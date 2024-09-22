@@ -1,5 +1,6 @@
 import { hash } from "bcrypt";
-import { model, Schema } from "mongoose";
+import { Schema, model } from "mongoose";
+
 import env from "../../config/env";
 import TUser from "../interfaces/user.interface";
 
@@ -27,6 +28,6 @@ UserSchema.pre("save", async function (next) {
     next();
 });
 
-const User = model<TUser>("user", UserSchema);
+const User = model<TUser>("users", UserSchema);
 
 export default User;

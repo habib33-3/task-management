@@ -7,12 +7,13 @@
     "author": "",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon src/index.ts",
+        "build": "rimraf ./dist && tsc",
+        "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
         "format": "npx prettier --write .",
         "lint": "npx eslint",
         "lint:fix": "npx eslint --fix",
         "prepare": "husky",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node dist/index.js"
     },
     "dependencies": {
         "bcrypt": "^5.1.1",
@@ -38,7 +39,9 @@
         "prettier": "^3.3.3",
         "prettier-plugin-organize-imports": "^4.0.0",
         "prettier-plugin-packagejson": "^2.5.2",
+        "rimraf": "^6.0.1",
         "ts-node": "^10.9.2",
+        "ts-node-dev": "^2.0.0",
         "typescript": "^5.6.2",
         "typescript-eslint": "^8.6.0"
     }

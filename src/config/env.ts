@@ -11,7 +11,7 @@ export default {
     jwt: {
         accessTokenSecret: process.env.ACCESS_TOKEN_SECRET as Secret,
         refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET as Secret,
-        refreshTokenExpiry: process.env.REFRESH_TOKEN_ACCESS_TOKEN_EXPIRY,
-        accessTokenExpiry: process.env.ACcESS_TOKEN_ACCESS_TOKEN_EXPIRY,
+        refreshTokenExpiry: process.env.REFRESH_TOKEN_EXPIRY,
+        accessTokenExpiry: process.env.ACCESS_TOKEN_EXPIRY,
     },
 };
