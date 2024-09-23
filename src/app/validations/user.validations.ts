@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+/**
+ * { "components": { "schemas": { "CreateUserInput": { "type": "object",
+ * "required": ["name", "email", "password"], "properties": { "name": { "type":
+ * "string", "description": "User's name", "example": "John Doe" }, "email": {
+ * "type": "string", "description": "User's email", "example":
+ * "john.doe@example.com" }, "password": { "type": "string", "description":
+ * "User's password", "example": "password123" } } } } } }
+ */
 export const createUserZodSchema = z.object({
     body: z.object({
         name: z.string({

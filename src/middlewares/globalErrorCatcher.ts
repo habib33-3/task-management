@@ -15,7 +15,7 @@ export const globalErrorCatcher = (
     let errorMessages: { path: string; message: string }[] = [];
 
     if (err instanceof ZodError) {
-        statusCode = HttpStatusCode.BAD_REQUEST; // or any status code you prefer for validation errors
+        statusCode = HttpStatusCode.BAD_REQUEST;
         message = "Validation Error";
         errorMessages = err.errors.map((error) => ({
             path: error.path.join("."), // Join path elements to create a string

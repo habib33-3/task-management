@@ -11,6 +11,6 @@
     "importOrderSortSpecifiers": true,
     "plugins": [
         "@trivago/prettier-plugin-sort-imports",
-        "prettier-plugin-packagejson"
+        "prettier-plugin-packagejson","prettier-plugin-jsdoc"
     ]
 }

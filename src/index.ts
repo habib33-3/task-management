@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import app from "./app";
-
 import env from "./config/env";
 import connectToDb from "./db";
 
@@ -10,6 +9,8 @@ const main = async () => {
 
         app.listen(env.port, () => {
             console.info(`Server running at ${env.port}`);
+
+            // swaggerDoc(app, env.port);
         });
     } catch (err) {
         console.error("Failed to start the server:", err);
