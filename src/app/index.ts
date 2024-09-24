@@ -1,4 +1,7 @@
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import express from "express";
+import morgan from "morgan";
 
 import env from "../config/env";
 import swaggerDoc from "../config/swagger";
@@ -15,9 +18,9 @@ app.use(
     })
 );
 
-app.get("/", async (req, res) => {
-    res.send("Hi");
-});
+app.use(cors());
+app.use(morgan("dev"));
+app.use(cookieParser());
 
 app.use("/api/v1", router);
 swaggerDoc(app, env.port);

@@ -1,4 +1,3 @@
-
 # Task Managment
 
 A task management system built with TypeScript, Express, and MongoDB. This application allows users to manage tasks efficiently with features like user authentication, task creation, updating, and deletion.

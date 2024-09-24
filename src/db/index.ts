@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import mongoose from "mongoose";
+
 import env from "../config/env";
 
 const DB_NAME = "task-management";

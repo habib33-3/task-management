@@ -19,7 +19,7 @@ const options: Options = {
                     in: "header",
                     name: "Authorization",
                     description:
-                        "Send the token directly in the Authorization header",
+                        "Send the access token directly in the Authorization header",
                 },
             },
         },
@@ -31,7 +31,6 @@ const options: Options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 const swaggerDoc = (app: Application, port: number) => {
-    // Serve Swagger UI
     app.use(
         "/docs",
         swaggerUi.serve,
@@ -42,7 +41,6 @@ const swaggerDoc = (app: Application, port: number) => {
         })
     );
 
-    // Serve raw Swagger spec JSON at a different route
     app.get("/doc.json", (req, res) => {
         res.setHeader("Content-Type", "application/json");
         res.send(swaggerSpec);
