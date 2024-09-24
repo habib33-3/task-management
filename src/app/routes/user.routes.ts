@@ -12,15 +12,14 @@ import {
 } from "./../controllers/user.controllers";
 
 const router = Router();
-
 /**
  * @openapi
  * {
  *   "paths": {
  *     "/api/v1/user/register": {
  *       "post": {
- *         "tags": ["user"],
- *         "description": "Create a new user",
+ *         "tags": ["User"],
+ *         "summary": "Create a new user",
  *         "requestBody": {
  *           "required": true,
  *           "content": {
@@ -88,34 +87,10 @@ const router = Router();
  *         }
  *       }
  *     }
- *   },
- *   "components": {
- *     "schemas": {
- *       "CreateUserInput": {
- *         "type": "object",
- *         "required": ["name", "email", "password"],
- *         "properties": {
- *           "name": {
- *             "type": "string",
- *             "description": "User's name",
- *             "example": "John Doe"
- *           },
- *           "email": {
- *             "type": "string",
- *             "description": "User's email",
- *             "example": "john.doe@example.com"
- *           },
- *           "password": {
- *             "type": "string",
- *             "description": "User's password",
- *             "example": "password123"
- *           }
- *         }
- *       }
- *     }
  *   }
  * }
  */
+
 router.post(
     "/register",
     validateSchema(createUserZodSchema),
@@ -128,8 +103,8 @@ router.post(
  *   "paths": {
  *     "/api/v1/user/login": {
  *       "post": {
- *         "tags": ["user"],
- *         "description": "Log in a user",
+ *         "tags": ["User"],
+ *         "summary": "Log in a user",
  *         "requestBody": {
  *           "required": true,
  *           "content": {
@@ -201,26 +176,6 @@ router.post(
  *         }
  *       }
  *     }
- *   },
- *   "components": {
- *     "schemas": {
- *       "LoginUserInput": {
- *         "type": "object",
- *         "required": ["email", "password"],
- *         "properties": {
- *           "email": {
- *             "type": "string",
- *             "description": "User's email",
- *             "example": "john.doe@example.com"
- *           },
- *           "password": {
- *             "type": "string",
- *             "description": "User's password",
- *             "example": "password123"
- *           }
- *         }
- *       }
- *     }
  *   }
  * }
  */
@@ -232,8 +187,8 @@ router.post("/login", validateSchema(loginUserZodSchema), loginUserHandler);
  *   "paths": {
  *     "/api/v1/user/refresh-token": {
  *       "post": {
- *         "tags": ["user"],
- *         "description": "Generate a new refresh token",
+ *         "tags": ["User"],
+ *         "summary": "Generate a new access token",
  *         "responses": {
  *           "200": {
  *             "description": "Refresh token generated successfully",
