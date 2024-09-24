@@ -17,6 +17,38 @@ import {
 
 const router = Router();
 
+/**
+ * @openapi
+ * paths:
+ *   /api/v1/tasks: {
+ *     post: {
+ *       summary: "Create a new task",
+ *       tags: ["Tasks"],
+ *       security: [{ jwtAuth: [] }],
+ *       requestBody: {
+ *         description: "Task data",
+ *         required: true,
+ *         content: {
+ *           "application/json": {
+ *             schema: { $ref: "#/components/schemas/CreateTaskInput" }
+ *           }
+ *         }
+ *       },
+ *       responses: {
+ *         201: {
+ *           description: "Task created successfully",
+ *           content: {
+ *             "application/json": {
+ *               schema: { $ref: "#/components/schemas/TaskResponse" }
+ *             }
+ *           }
+ *         },
+ *         403: { description: "Forbidden" },
+ *         400: { description: "Bad Request" }
+ *       }
+ *     }
+ *   }
+ */
 router.post(
     "/",
     verifyAuth,
@@ -24,10 +56,107 @@ router.post(
     createTaskHandler
 );
 
+/**
+ * @openapi
+ * paths:
+ *   /api/v1/tasks: {
+ *     get: {
+ *       summary: "Get all tasks for the logged-in user",
+ *       tags: ["Tasks"],
+ *       security: [{ jwtAuth: [] }],
+ *       responses: {
+ *         200: {
+ *           description: "List of tasks retrieved successfully",
+ *           content: {
+ *             "application/json": {
+ *               schema: {
+ *                 type: "array",
+ *                 items: { $ref: "#/components/schemas/TaskResponse" }
+ *               }
+ *             }
+ *           }
+ *         },
+ *         403: { description: "Forbidden" },
+ *         400: { description: "Bad Request" }
+ *       }
+ *     }
+ *   }
+ */
 router.get("/", verifyAuth, getAllTasksHandler);
 
+/**
+ * @openapi
+ * paths:
+ *   /api/v1/tasks/{taskId}: {
+ *     get: {
+ *       summary: "Get a single task by its ID",
+ *       tags: ["Tasks"],
+ *       security: [{ jwtAuth: [] }],
+ *       parameters: [
+ *         {
+ *           name: "taskId",
+ *           in: "path",
+ *           required: true,
+ *           description: "The ID of the task",
+ *           schema: { type: "string" }
+ *         }
+ *       ],
+ *       responses: {
+ *         200: {
+ *           description: "Task retrieved successfully",
+ *           content: {
+ *             "application/json": {
+ *               schema: { $ref: "#/components/schemas/TaskResponse" }
+ *             }
+ *           }
+ *         },
+ *         404: { description: "Task not found" }
+ *       }
+ *     }
+ *   }
+ */
 router.get("/:taskId", verifyAuth, getSingleTaskHandler);
 
+/**
+ * @openapi
+ * paths:
+ *   /api/v1/tasks/{taskId}: {
+ *     patch: {
+ *       summary: "Update a task",
+ *       tags: ["Tasks"],
+ *       security: [{ jwtAuth: [] }],
+ *       parameters: [
+ *         {
+ *           name: "taskId",
+ *           in: "path",
+ *           required: true,
+ *           description: "The ID of the task to update",
+ *           schema: { type: "string" }
+ *         }
+ *       ],
+ *       requestBody: {
+ *         description: "Task data to update",
+ *         required: true,
+ *         content: {
+ *           "application/json": {
+ *             schema: { $ref: "#/components/schemas/UpdateTaskInput" }
+ *           }
+ *         }
+ *       },
+ *       responses: {
+ *         200: {
+ *           description: "Task updated successfully",
+ *           content: {
+ *             "application/json": {
+ *               schema: { $ref: "#/components/schemas/TaskResponse" }
+ *             }
+ *           }
+ *         },
+ *         404: { description: "Task not found" }
+ *       }
+ *     }
+ *   }
+ */
 router.patch(
     "/:taskId",
     verifyAuth,
@@ -35,6 +164,46 @@ router.patch(
     updateTaskHandler
 );
 
+/**
+ * @openapi
+ * paths:
+ *   /api/v1/tasks/change-status/{taskId}: {
+ *     patch: {
+ *       summary: "Change the status of a task",
+ *       tags: ["Tasks"],
+ *       security: [{ jwtAuth: [] }],
+ *       parameters: [
+ *         {
+ *           name: "taskId",
+ *           in: "path",
+ *           required: true,
+ *           description: "The ID of the task to change the status of",
+ *           schema: { type: "string" }
+ *         }
+ *       ],
+ *       requestBody: {
+ *         description: "Status change data",
+ *         required: true,
+ *         content: {
+ *           "application/json": {
+ *             schema: { $ref: "#/components/schemas/ChangeStatusInput" }
+ *           }
+ *         }
+ *       },
+ *       responses: {
+ *         200: {
+ *           description: "Task status updated successfully",
+ *           content: {
+ *             "application/json": {
+ *               schema: { $ref: "#/components/schemas/TaskResponse" }
+ *             }
+ *           }
+ *         },
+ *         404: { description: "Task not found" }
+ *       }
+ *     }
+ *   }
+ */
 router.patch(
     "/change-status/:taskId",
     verifyAuth,

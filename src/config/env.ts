@@ -5,7 +5,7 @@ dotenv.config();
 
 export default {
     env: process.env.NODE_ENV,
-    port: process.env.PORT || 5000,
+    port: (process.env.PORT || 5000) as number,
     dbUrl: process.env.DB_URL,
     saltRound: process.env.SALT_ROUND,
     jwt: {

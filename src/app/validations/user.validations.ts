@@ -1,5 +1,35 @@
 import { z } from "zod";
 
+/**
+ * @openapi
+ * {
+ *   "components": {
+ *     "schemas": {
+ *       "CreateUserInput": {
+ *         "type": "object",
+ *         "required": ["name", "email", "password"],
+ *         "properties": {
+ *           "name": {
+ *             "type": "string",
+ *             "description": "User's name",
+ *             "example": "John Doe"
+ *           },
+ *           "email": {
+ *             "type": "string",
+ *             "description": "User's email",
+ *             "example": "john.doe@example.com"
+ *           },
+ *           "password": {
+ *             "type": "string",
+ *             "description": "User's password",
+ *             "example": "password123"
+ *           }
+ *         }
+ *       }
+ *     }
+ *   }
+ * }
+ */
 export const createUserZodSchema = z.object({
     body: z.object({
         name: z.string({
@@ -24,6 +54,31 @@ export const createUserZodSchema = z.object({
 
 export type TCreateUser = z.infer<typeof createUserZodSchema>["body"];
 
+/**
+ * @openapi
+ * {
+ *   "components": {
+ *     "schemas": {
+ *       "LoginUserInput": {
+ *         "type": "object",
+ *         "required": ["email", "password"],
+ *         "properties": {
+ *           "email": {
+ *             "type": "string",
+ *             "description": "User's email",
+ *             "example": "john.doe@example.com"
+ *           },
+ *           "password": {
+ *             "type": "string",
+ *             "description": "User's password",
+ *             "example": "password123"
+ *           }
+ *         }
+ *       }
+ *     }
+ *   }
+ * }
+ */
 export const loginUserZodSchema = z.object({
     body: z.object({
         email: z
